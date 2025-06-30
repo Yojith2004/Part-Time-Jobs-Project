@@ -1,0 +1,77 @@
+<div id="jobsList" class="job-container"></div>
+
+<script>
+  async function fetchJobs() {
+    const response = await fetch("http://localhost:50001/api/jobs");
+    const jobs = await response.json();
+
+    let jobsHtml = "";
+    jobs.forEach((job) => {
+      jobsHtml += `
+        <div class="job-card">
+          <h3>${job.title}</h3>
+          <p><strong>Description:</strong> ${job.description}</p>
+          <p><strong>Location:</strong> ${job.location}</p>
+          <p><strong>Salary:</strong> $${job.salary}</p>
+          <button class="apply-btn">Apply</button>
+        </div>
+      `;
+    });
+
+    document.getElementById("jobsList").innerHTML = jobsHtml;
+  }
+
+  fetchJobs();
+</script>
+
+<style>
+  .job-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .job-card {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    width: 300px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+  }
+
+  .job-card:hover {
+    transform: scale(1.05);
+  }
+
+  .job-card h3 {
+    color: #333;
+    margin-bottom: 10px;
+  }
+
+  .job-card p {
+    color: #555;
+    font-size: 14px;
+    margin: 5px 0;
+  }
+
+  .apply-btn {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+  }
+
+  .apply-btn:hover {
+    background: #218838;
+  }
+</style>

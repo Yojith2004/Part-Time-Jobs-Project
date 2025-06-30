@@ -1,0 +1,50 @@
+<input type="text" id="search-query" placeholder="Search for jobs">
+<button id="search-button">Search</button>
+<ul id="job-results"></ul>
+
+<script>
+    async function fetchJobs() {
+        try {
+            const response = await fetch("http://localhost:50001/api/jobs");
+            const jobs = await response.json();
+            displayJobs(jobs);
+            return jobs; // Store jobs for searching later
+        } catch (error) {
+            console.error("Error fetching jobs:", error);
+            return [];
+        }
+    }
+
+    function searchJobs(jobs) {
+        const query = document.getElementById("search-query").value.toLowerCase();
+        const results = document.getElementById("job-results");
+        results.innerHTML = ""; // Clear previous results
+
+        const filteredJobs = jobs.filter(job =>
+            job.title.toLowerCase().includes(query) ||
+            job.description.toLowerCase().includes(query) ||
+            job.location.toLowerCase().includes(query)
+        );
+
+        if (filteredJobs.length === 0) {
+            results.innerHTML = "<li>No jobs found.</li>";
+        } else {
+            filteredJobs.forEach(job => {
+                const li = document.createElement("li");
+                li.textContent = `${job.title} - ${job.location} - $${job.salary}`;
+                results.appendChild(li);
+            });
+        }
+    }
+
+    document.getElementById("search-button").addEventListener("click", async function () {
+        const jobs = await fetchJobs();
+        searchJobs(jobs);
+    });
+
+    // Load all jobs on page load
+    document.addEventListener("DOMContentLoaded", async function () {
+        const jobs = await fetchJobs();
+        searchJobs(jobs); // Show all jobs initially
+    });
+</script>

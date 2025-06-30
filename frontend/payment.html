@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stripe Payment</title>
+  <script src="https://js.stripe.com/v3/"></script>
+</head>
+<body>
+  <h1>Payment Page</h1>
+  <div id="card-element"></div>
+  <button id="payButton">Pay</button>
+
+  <script>
+    const stripe = Stripe('pk_test_51QgNvyL1dij7eqAwu6qK1Y6FUhrZa1SrSr1BJvf5NHOJRvTnJYkFsaxVeY6HN9icTO93RVmVWOWyaQYX8d0kS3b700duI9TU2G');
+    let elements = stripe.elements();
+    let cardElement = elements.create('card');
+    cardElement.mount('#card-element');
+
+    document.getElementById("payButton").addEventListener("click", async () => {
+      const response = await fetch("http://localhost:50001/api/checkout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          amount: 5000, // Amount in cents (e.g., $50)
+        }),
+      });
+
+      const { clientSecret } = await response.json();
+
+      const { error } = await stripe.confirmCardPayment(clientSecret, {
+        payment_method: {
+          card: cardElement,
+        },
+      });
+
+      if (error) {
+        alert('Payment failed: ' + error.message);
+      } else {
+        alert('Payment successful!');
+      }
+    });
+  </script>
+</body>
+</html>
