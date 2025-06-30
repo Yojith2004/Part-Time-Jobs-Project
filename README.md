@@ -1,62 +1,49 @@
-\# Part-Time Job Portal (Academic Project)
-
-
+# Part-Time Job Portal (Academic Project)
 
 A full-stack web application for posting and browsing part-time jobs. Built as an academic project to demonstrate core concepts of authentication, database interaction, and role-based access control.
 
+## Features
 
+- User registration and login
 
-\## Features
+- Role-based access for employers and job seekers
 
-\- User registration and login
+- Employers can post jobs
 
-\- Role-based access for employers and job seekers
+- Job seekers can browse and search job listings
 
-\- Employers can post jobs
+- Simple dashboard view and logout functionality
 
-\- Job seekers can browse and search job listings
+## Tech Stack
 
-\- Simple dashboard view and logout functionality
+- **Frontend**: HTML, CSS, JavaScript
 
+- **Backend**: Node.js, Express.js
 
+- **Database**: SQLite
 
-\## Tech Stack
+- **Authentication**: bcrypt
 
-\- \*\*Frontend\*\*: HTML, CSS, JavaScript
+## Screenshots
 
-\- \*\*Backend\*\*: Node.js, Express.js
+Raw interface captures are available in the [Screenshots](/Screenshots) folder.
 
-\- \*\*Database\*\*: SQLite
+## Getting Started
 
-\- \*\*Authentication\*\*: bcrypt
+1. Clone the repository
 
+2. Run `npm install` to install dependencies
 
+3. Start the backend server: `node server.js`
 
-\## Screenshots
+4. Open `index.html` in your browser
 
-Raw interface captures are available in the \[Screenshots](/Screenshots) folder.
+## Note  
 
+- **Academic Demonstration**: Built for learning core concepts  
 
+- **Development Focus**: Prioritized functionality over polish  
 
-\## Getting Started
+- **Not Production-Ready**: Lacks advanced features like input validation or scalability  
 
-1\. Clone the repository
-
-2\. Run `npm install` to install dependencies
-
-3\. Start the backend server: `node server.js`
-
-4\. Open `index.html` in your browser
-
-
-
-\## Note  
-
-\- \*\*Academic Demonstration\*\*: Built for learning core concepts  
-
-\- \*\*Development Focus\*\*: Prioritized functionality over polish  
-
-\- \*\*Not Production-Ready\*\*: Lacks advanced features like input validation or scalability  
-
-\- \*\*Unmaintained\*\*: No active updates planned
-
+- **Unmaintained**: No active updates planned
